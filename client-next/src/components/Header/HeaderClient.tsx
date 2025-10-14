@@ -1,7 +1,6 @@
-"use client";
+"use client"; // теперь это client component
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { MenuItem } from "./types";
@@ -21,20 +20,14 @@ interface HeaderProps {
   menuItems: MenuItem[];
 }
 
-const Header: React.FC<HeaderProps> = ({ menuItems }) => {
+export default function HeaderClient({ menuItems }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [emblaRef] = useEmblaCarousel({ align: "start", dragFree: true });
 
   return (
     <HeaderContainer>
       <Logo>
-        <Image
-          src={logoImg}
-          alt="SpaceX Logo"
-          width={140}
-          height={40}
-          priority
-        />
+        <Image src={logoImg} alt="SpaceX Logo" width={140} height={40} />
       </Logo>
 
       <CarouselWrapper>
@@ -42,9 +35,9 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
           <CarouselContainer>
             {menuItems.map((item) => (
               <NavItem key={item.id}>
-                <Link className="header-link" href={item.url}>
+                <a className="header-link" href={item.url}>
                   {item.title}
-                </Link>
+                </a>
               </NavItem>
             ))}
           </CarouselContainer>
@@ -62,13 +55,11 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
 
       <MobileMenu className={isOpen ? "open" : ""}>
         {menuItems.map((item) => (
-          <Link key={item.id} href={item.url} onClick={() => setIsOpen(false)}>
+          <a key={item.id} href={item.url} onClick={() => setIsOpen(false)}>
             {item.title}
-          </Link>
+          </a>
         ))}
       </MobileMenu>
     </HeaderContainer>
   );
-};
-
-export default Header;
+}
