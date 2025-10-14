@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 async function getMenuItems(): Promise<MenuItem[]> {
-  const res = await fetch("http://localhost:3001/menu", {
+  const res = await fetch("http://127.0.0.1:8000/api/menuitem", {
     next: { revalidate: 60 * 60 }, // кэш на 1 час
   });
 
