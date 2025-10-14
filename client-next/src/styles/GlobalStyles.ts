@@ -316,6 +316,7 @@ export const AppContainer = styled.div`
   width: 100%;
   height: 100%;
   max-width: 1170px;
+  margin: 0 auto;
 
   /* ===== Кастомный скроллбар ===== */
 
