@@ -15,6 +15,7 @@ import {
   MobileMenu,
 } from "./styles";
 import logoImg from "@/assets/logo.svg";
+import { fallbackMenuItems } from "./consts";
 
 interface HeaderProps {
   menuItems: MenuItem[];
@@ -23,6 +24,9 @@ interface HeaderProps {
 export default function HeaderClient({ menuItems }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [emblaRef] = useEmblaCarousel({ align: "start", dragFree: true });
+
+  const displayMenuItems =
+    menuItems && menuItems.length > 0 ? menuItems : fallbackMenuItems;
 
   return (
     <HeaderContainer>
@@ -33,7 +37,7 @@ export default function HeaderClient({ menuItems }: HeaderProps) {
       <CarouselWrapper>
         <CarouselViewport ref={emblaRef}>
           <CarouselContainer>
-            {menuItems.map((item) => (
+            {displayMenuItems.map((item) => (
               <NavItem key={item.id}>
                 <a className="header-link" href={item.url}>
                   {item.title}
@@ -54,7 +58,7 @@ export default function HeaderClient({ menuItems }: HeaderProps) {
       </Burger>
 
       <MobileMenu className={isOpen ? "open" : ""}>
-        {menuItems.map((item) => (
+        {displayMenuItems.map((item) => (
           <a key={item.id} href={item.url} onClick={() => setIsOpen(false)}>
             {item.title}
           </a>

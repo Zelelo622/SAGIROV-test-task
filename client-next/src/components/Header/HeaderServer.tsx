@@ -1,5 +1,6 @@
+import { fallbackMenuItems } from "./consts";
 import HeaderClient from "./HeaderClient";
-import { MenuItem } from "./types";
+import { MenuItem} from "./types";
 
 async function getMenuItems(): Promise<MenuItem[]> {
   try {
@@ -9,13 +10,19 @@ async function getMenuItems(): Promise<MenuItem[]> {
 
     if (!res.ok) {
       console.error("Failed to fetch menu items:", res.statusText);
-      return [];
+      return fallbackMenuItems;
     }
 
-    return await res.json();
+    const serverMenuItems = await res.json();
+
+    if (!serverMenuItems || serverMenuItems.length === 0) {
+      return fallbackMenuItems;
+    }
+
+    return serverMenuItems;
   } catch (err) {
     console.error("Fetch error:", err);
-    return [];
+    return fallbackMenuItems;
   }
 }
 
