@@ -1,24 +1,23 @@
 version: "3.9"
 
 services:
-  # Backend
   web:
     build: 
-      context: ./server/mars_ilon  # путь к папке с бэкендом
+      context: ./server/mars_ilon
       dockerfile: Dockerfile
     container_name: mars_ilon_web
     command: >
-      sh -c "./wait-for-it.sh db:5432 -- 
+      sh -c "./server/mars-ilon/wait-for-it.sh db:5432 --
              python manage.py migrate &&
              python manage.py collectstatic --noinput &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./server/mars_ilon:/app
-      - static_volume:/app/staticfiles
+      - ./server/mars_ilon/staticfiles:/app/staticfiles
     ports:
       - "8000:8000"
     env_file:
-      - ./server/mars_ilon/.env  # или общий .env
+      - ./server/mars_ilon/.env
     environment:
       - DEBUG=False
       - DJANGO_ALLOWED_HOSTS=*
@@ -27,7 +26,6 @@ services:
     networks:
       - app-network
 
-  # Database
   db:
     image: postgres:18
     container_name: mars_ilon_db
@@ -43,10 +41,9 @@ services:
     networks:
       - app-network
 
-  # Frontend
   client:
     build:
-      context: ./client-next  # путь к папке с фронтендом
+      context: ./client-next
       dockerfile: Dockerfile
     container_name: next_client
     ports:

@@ -1,4 +1,4 @@
-"use client"; // теперь это client component
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";

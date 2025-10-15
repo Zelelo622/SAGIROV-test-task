@@ -34,7 +34,6 @@ const Hero = () => {
       setShowLine(window.innerWidth > 768);
     };
 
-    // начальная проверка
     updateLine();
     checkWidth();
 
