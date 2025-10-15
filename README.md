@@ -48,3 +48,8 @@ python manage.py runserver
 Бэкенд API: http://localhost:8000
 
 Админка Django: http://localhost:8000/admin
+
+### Данные для админки
+name: admin  
+email: admin@spacex.com
+pass: admin123

@@ -7,9 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: mars_ilon_web
     command: >
-      sh -c "./server/mars-ilon/wait-for-it.sh db:5432 --
+      sh -c "./wait-for-it.sh db:5432 --
              python manage.py migrate &&
              python manage.py collectstatic --noinput &&
+             echo \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@spacex.com', 'admin123') if not User.objects.filter(username='admin').exists() else print('Superuser already exists')\" | python manage.py shell &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./server/mars_ilon:/app
