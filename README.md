@@ -23,14 +23,6 @@ npm run build
 npm run start
 ```
 
-client:
-- npm run build
-- npm run start
-
-server:
-- .\.venv\Scripts\activate
-- python manage.py runserver
-
 ------------
 
 ## 🐍 Бэкенд (Django)
