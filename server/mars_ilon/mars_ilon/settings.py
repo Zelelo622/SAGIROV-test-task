@@ -29,8 +29,29 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    '193.32.188.225',
+    'localhost',
+    '127.0.0.1',
+    'web',  # для docker network
+]
 
+# CSRF настройки
+CSRF_TRUSTED_ORIGINS = [
+    'http://193.32.188.225',
+    'http://193.32.188.225:8000',
+    'http://193.32.188.225:3000',
+    'http://localhost:3000',
+    'http://localhost:8000',
+]
+
+# CORS настройки (если используете CORS)
+CORS_ALLOWED_ORIGINS = [
+    "http://193.32.188.225:3000",
+    "http://193.32.188.225:8000",
+    "http://localhost:3000",
+    "http://localhost:8000",
+]
 
 # Application definition
 
@@ -142,3 +163,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'

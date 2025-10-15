@@ -20,7 +20,8 @@ services:
       - ./server/mars_ilon/.env
     environment:
       - DEBUG=False
-      - DJANGO_ALLOWED_HOSTS=*
+      - DJANGO_ALLOWED_HOSTS=193.32.188.225,localhost,127.0.0.1,web
+      - DJANGO_CSRF_TRUSTED_ORIGINS=http://193.32.188.225,http://193.32.188.225:8000,http://193.32.188.225:3000
     depends_on:
       - db
     networks:
