@@ -4,8 +4,6 @@ import styled, { createGlobalStyle } from "styled-components";
 import backgroundImg from "@/assets/background.png";
 
 export const GlobalStyles = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
-
   html {
   }
 

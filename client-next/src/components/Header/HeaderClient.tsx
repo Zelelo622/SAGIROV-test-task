@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import logoImg from "@/assets/logo.svg";
 import { fallbackMenuItems } from "./consts";
+import Link from "next/link";
 
 interface HeaderProps {
   menuItems: MenuItem[];
@@ -39,9 +40,9 @@ export default function HeaderClient({ menuItems }: HeaderProps) {
           <CarouselContainer>
             {displayMenuItems.map((item) => (
               <NavItem key={item.id}>
-                <a className="header-link" href={item.url}>
+                <Link className="header-link" href={item.url}>
                   {item.title}
-                </a>
+                </Link>
               </NavItem>
             ))}
           </CarouselContainer>
@@ -59,9 +60,9 @@ export default function HeaderClient({ menuItems }: HeaderProps) {
 
       <MobileMenu className={isOpen ? "open" : ""}>
         {displayMenuItems.map((item) => (
-          <a key={item.id} href={item.url} onClick={() => setIsOpen(false)}>
+          <Link key={item.id} href={item.url} onClick={() => setIsOpen(false)}>
             {item.title}
-          </a>
+          </Link>
         ))}
       </MobileMenu>
     </HeaderContainer>
